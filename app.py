@@ -6,7 +6,7 @@ import streamlit as st
 st.header('Análise de Dados de Veículos Usados')
 
 # Carregar o conjunto de dados
-car_data = pd.read_csv("D:/Documents/vehicles.csv")
+car_data = pd.read_csv("vehicles.csv")
 
 # Botão para criar o histograma
 hist_button = st.button('Criar histograma')
