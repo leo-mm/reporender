@@ -2,22 +2,25 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-# Cabeçalho do aplicativo
-st.header('Análise de Dados de Veículos Usados')
+# Título
+st.title("Análise de Dados de Veículos Usados")
 
-# Carregar o conjunto de dados
+# Carregar os dados
 car_data = pd.read_csv("vehicles.csv")
 
-# Botão para criar o histograma
-hist_button = st.button('Criar histograma')
+# Opção para selecionar o gráfico
+opcao = st.radio(
+    "Selecione o gráfico que deseja visualizar:",
+    ("Histograma da Quilometragem", "Dispersão Preço vs Quilometragem")
+)
 
-if hist_button:
-    # Mensagem ao clicar no botão
-    st.write('Criando um histograma para a quilometragem dos veículos')
+# Mostrar o gráfico conforme a seleção
+if opcao == "Histograma da Quilometragem":
+    st.write("Criando um histograma para a quilometragem dos veículos")
+    fig = px.histogram(car_data, x="odometer")
+    st.plotly_chart(fig)
 
-    # Criar o histograma
-    fig = px.histogram(car_data, x='odometer', nbins=30,
-                        title='Distribuição da Quilometragem dos Veículos')
-
-    # Exibir o histograma no aplicativo
-    st.plotly_chart(fig, use_container_width=True)
+elif opcao == "Dispersão Preço vs Quilometragem":
+    st.write("Criando gráfico de dispersão entre preço e quilometragem")
+    fig2 = px.scatter(car_data, x="odometer", y="price")
+    st.plotly_chart(fig2)
